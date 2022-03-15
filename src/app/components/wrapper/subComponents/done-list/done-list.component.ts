@@ -11,9 +11,9 @@ export class DoneListComponent implements OnInit {
     doneList: Task[];
 
   constructor() {
-    let task1 = new Task("Studia Angular", 10);
-    let task2 = new Task("Studia Angular", 10);
-    let task3 = new Task("Studia Angular", 10);
+    let task1 = new Task("Studia HTML", 10);
+    let task2 = new Task("Studia CSS", 10);
+    let task3 = new Task("Bevi caffè", 10);
     this.doneList = [task1, task2, task3];
   }
 

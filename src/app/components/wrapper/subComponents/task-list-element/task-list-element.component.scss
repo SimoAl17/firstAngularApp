@@ -1,35 +1,10 @@
 .container{
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  padding: 8px;
-  margin: 2px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  justify-content: space-between;
+  margin: 4px;
 }
 
-.task-name{
-  padding: 2px;
-  font-size: large;
-  font-weight: bold;
-}
+
 
 .data-container{
   display: flex;
   flex-direction: column;
-}
-
-.icon{
-  width: 20px;
-  padding: 8px;
-  border-radius: 18px;
-}
-
-.icon-btn{
-  border-style: none;
-  background-color: white;
-}
-
-.icon:hover{
-  background-color: rgb(255, 99, 71, 0.185);
 }
