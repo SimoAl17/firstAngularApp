@@ -4,10 +4,9 @@ import { Task } from 'src/app/model/task';
 @Component({
   selector: 'app-task-list-element',
   templateUrl: './task-list-element.component.html',
-  styleUrls: ['./task-list-element.component.scss']
+  styleUrls: ['./task-list-element.component.scss'],
 })
 export class TaskListElementComponent implements OnInit {
-
   @Input() task?: Task;
 
   @Output() doneEvent: EventEmitter<string>;
@@ -16,15 +15,12 @@ export class TaskListElementComponent implements OnInit {
     this.doneEvent = new EventEmitter<string>();
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   taskDone(){
     if (this.task) {
-      this.doneEvent.emit(this.task.id);  
+       this.doneEvent.emit(this.task.id)
     }
-    
   }
 
 }

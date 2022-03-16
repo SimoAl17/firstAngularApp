@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommService } from 'src/app/services/comm.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WrapperComponent implements OnInit {
 
-  constructor() { }
+  constructor(private commS: CommService) { }
 
   ngOnInit(): void {
+    this.commS.isDrawerOpen.subscribe(isOpen => {
+      console.log("drawer open", isOpen);
+    })
   }
 
 }
