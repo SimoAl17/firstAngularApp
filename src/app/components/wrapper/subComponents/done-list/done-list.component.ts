@@ -5,16 +5,17 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-done-list',
   templateUrl: './done-list.component.html',
-  styleUrls: ['./done-list.component.scss'],
+  styleUrls: ['./done-list.component.scss']
 })
 export class DoneListComponent implements OnInit {
+
   doneList: Task[] = [];
 
-  constructor(private taskService: ApiService) {}
+  constructor(private apiS: ApiService) {
+  }
 
   ngOnInit(): void {
-    this.taskService
-      .getDoneTask()
-      .subscribe((doneList) => (this.doneList = doneList));
+    this.apiS.getDoneTasks().subscribe(task => this.doneList = task);
   }
+
 }

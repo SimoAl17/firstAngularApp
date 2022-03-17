@@ -6,18 +6,13 @@ export class Task {
   tag?: string[];
 
   creationDate: Date;
-  doneDate?: Date; //? sets it as optional
+  doneDate?: Date;
   dueDate?: Date;
 
   priority: number;
   repeat?: number;
 
-  constructor(
-    id: string,
-    name: string,
-    priority: number = 0,
-    creationDate?: number
-  ) {
+  constructor(id: string ,name: string, priority: number = 0, creationDate?: number){
     this.name = name;
     this.priority = Task.getFirstNumber(priority);
     if (creationDate) {
@@ -25,16 +20,23 @@ export class Task {
     } else {
       this.creationDate = new Date();
     }
-
-    this.id = id;
+    this.id = id
   }
 
-  static getFirstNumber(fullNumber: number): number {
-    const firstDigitStr = String(fullNumber)[0];
-    return Number(firstDigitStr);
+  static getFirstNumber(fullNumber: number): number{
+    return parseInt(fullNumber.toString().slice(-1));
   }
 
-  // static generateRandom(): number {
+  static createFromJsonObj(obj: any){
+    const task = new Task(obj.id, obj.name, obj.priority, obj.creationDate);
+    if (obj.doneDate) {
+      task.doneDate = new Date(obj.doneDate);
+    }
+    return task;
+  }
+
+  // static generateRandom(): number{
   //   return Math.floor(Math.random() * 1000000);
   // }
+
 }
