@@ -12,7 +12,7 @@ export class Task {
   priority: number;
   repeat?: number;
 
-  constructor(id: string ,name: string, priority: number = 0, creationDate?: number){
+  constructor(id: string, name: string, priority: number = 0, creationDate?: number) {
     this.name = name;
     this.priority = Task.getFirstNumber(priority);
     if (creationDate) {
@@ -20,7 +20,17 @@ export class Task {
     } else {
       this.creationDate = new Date();
     }
-    this.id = id
+    this.id = id;
+  }
+
+  toDatabaseModel() {
+    const dbObject: any = {id: this.id, name: this.name, creationDate: this.creationDate.getTime()}
+    if (this.doneDate) {
+      dbObject.doneDate = this.doneDate.getTime();
+    } else {
+      dbObject.doneDate = null;
+    }
+    return dbObject;
   }
 
   static getFirstNumber(fullNumber: number): number{
@@ -31,6 +41,8 @@ export class Task {
     const task = new Task(obj.id, obj.name, obj.priority, obj.creationDate);
     if (obj.doneDate) {
       task.doneDate = new Date(obj.doneDate);
+    } else {
+      task.doneDate = undefined;
     }
     return task;
   }

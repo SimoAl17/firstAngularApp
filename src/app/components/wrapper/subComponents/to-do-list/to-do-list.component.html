@@ -1,3 +1,3 @@
 <div class="container">
-<app-task-list-element *ngFor="let task of taskList" [task]="task" (doneEvent)="taskDeleted($event)"></app-task-list-element>
+<app-task-list-element *ngFor="let task of taskList" [task]="task" (doneEvent)="taskDone($event)"></app-task-list-element>
 </div>

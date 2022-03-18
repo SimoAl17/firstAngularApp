@@ -9,18 +9,19 @@ import { Task } from 'src/app/model/task';
 export class TaskListElementComponent implements OnInit {
   @Input() task?: Task;
 
-  @Output() doneEvent: EventEmitter<string>;
+  @Output() doneEvent: EventEmitter<Task>;
 
   constructor() {
-    this.doneEvent = new EventEmitter<string>();
+    this.doneEvent = new EventEmitter<Task>();
   }
 
   ngOnInit(): void {}
 
-  taskDone(){
+  taskClicked(event: any){
     if (this.task) {
-       this.doneEvent.emit(this.task.id)
+       this.doneEvent.emit(this.task)
     }
+    event.stopPropagation();
   }
 
 }

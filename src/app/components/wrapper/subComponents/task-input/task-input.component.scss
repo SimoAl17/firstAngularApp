@@ -2,4 +2,15 @@
     width: 100%;
     min-height: 100px;
     background-color: gold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    margin-bottom: 1.34375em;
+}
+
+.example-form-field{
+    margin: 0px 8px;
 }

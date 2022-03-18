@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/model/task';
-import { ApiService } from 'src/app/services/api.service';
+import { Api2Service } from 'src/app/services/api2.service';
+
 
 @Component({
   selector: 'app-done-list',
@@ -11,11 +12,27 @@ export class DoneListComponent implements OnInit {
 
   doneList: Task[] = [];
 
-  constructor(private apiS: ApiService) {
+  constructor(private api2S: Api2Service) {
   }
 
   ngOnInit(): void {
-    this.apiS.getDoneTasks().subscribe(task => this.doneList = task);
+    this.api2S.doneTasks$.subscribe(task => this.doneList = task);
+  }
+
+  taskDelete(task: Task) {
+    // this.api2S.deleteTask(task.id).subscribe(b => {
+    //   if(!b){
+    //     prompt("errore nel backend");
+    //   }
+    // })
+
+    this.api2S.removeDoneTask(task);
+    this.api2S.deleteTask(task.id).subscribe({
+      next: task => {}, 
+      error: err => {
+        this.api2S.addDoneTask(task);
+      }
+    });
   }
 
 }

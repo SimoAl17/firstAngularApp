@@ -2,9 +2,11 @@
   margin: 4px;
 }
 
-
-
 .data-container{
   display: flex;
   flex-direction: column;
+}
+
+.task-description{
+  justify-content: end;
 }

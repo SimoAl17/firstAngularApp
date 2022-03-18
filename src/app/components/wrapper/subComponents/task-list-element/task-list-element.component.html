@@ -6,14 +6,17 @@
       <mat-panel-title>
         {{task.name}}
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description class="task-description">
         Priority: {{task.priority}}
-        
-        <mat-icon (click)="taskDone()">done</mat-icon>
+        <mat-icon *ngIf="!task.doneDate" (click)="taskClicked($event)">done</mat-icon>
+        <mat-icon *ngIf="task.doneDate" (click)="taskClicked($event)">delete</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <span>{{task.creationDate.toISOString()}}</span>
-    <span>{{task.id}}</span>
+    <div class="data-container">
+      <span>{{task.creationDate}}</span>
+      <span *ngIf="task.doneDate">{{task.doneDate}}</span>
+      <span>{{task.id}}</span>
+    </div>
     </mat-expansion-panel>
 
 </mat-accordion>

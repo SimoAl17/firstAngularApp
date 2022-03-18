@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/model/task';
-import { ApiService } from 'src/app/services/api.service';
+import { Api2Service } from 'src/app/services/api2.service';
 
 @Component({
   selector: 'app-to-do-list',
@@ -11,12 +11,12 @@ export class ToDoListComponent implements OnInit {
 
   taskList: Task[] = [];
 
-  constructor(private apiS: ApiService) {
+  constructor(private api2S: Api2Service) {
   }
 
   ngOnInit(): void {
     // this.apiS.getActiveTask().subscribe(this.filterAndParseTask);
-    this.apiS.getActiveTasks().subscribe(task => this.taskList = task);
+    this.api2S.activeTasks$.subscribe(task => this.taskList = task);
   }
 
   // filterAndParseTask(elements: any[]):void{
@@ -28,14 +28,21 @@ export class ToDoListComponent implements OnInit {
   //   }
   // }
 
-  taskDeleted(id: string){
-    let tempArray = [];
-    for (const task of this.taskList) {
-      if (task.id !== id) {
-        tempArray.push(task);
+  
+  taskDone(task: Task) {
+    // this.api2S.completeTask(task).subscribe(b => {
+    //   if (!b) {
+    //     prompt("Errore nel backend")
+    //   }
+    // });
+    this.api2S.removeActiveTask(task);
+    this.api2S.addDoneTask(task);
+    this.api2S.completeTask(task).subscribe({
+      next: task => {}, 
+      error: err => {
+        this.api2S.addActiveTask(task);
+        this.api2S.removeDoneTask(task);
       }
-    }
-    this.taskList = tempArray;
+    });
   }
-
 }

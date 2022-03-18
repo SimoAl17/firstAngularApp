@@ -70,7 +70,7 @@ export class ApiService {
   taskDone(task: Task): Observable<boolean>{
     const httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"})}
     task.doneDate = new Date();
-    return this.http.put<Task>(this.API_URL + "/" + task.id, httpOptions).pipe(
+    return this.http.put<Task>(this.API_URL + "/" + task.id, task.toDatabaseModel, httpOptions).pipe(
       map(task => {
         this.getAllTasks();
         return true;

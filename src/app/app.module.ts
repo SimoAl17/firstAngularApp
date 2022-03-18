@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
+import {MatInputModule} from '@angular/material/input'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { TaskInputComponent } from './components/wrapper/subComponents/task-inpu
 import { TaskListElementComponent } from './components/wrapper/subComponents/task-list-element/task-list-element.component';
 import { ToDoListComponent } from './components/wrapper/subComponents/to-do-list/to-do-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -46,7 +48,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatExpansionModule,
     HttpClientModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatInputModule,
+    FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
