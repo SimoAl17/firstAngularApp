@@ -7,7 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
-import {MatInputModule} from '@angular/material/input'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,7 +51,8 @@ import { FormsModule } from "@angular/forms";
     HttpClientModule,
     MatSidenavModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatChipsModule
 
   ],
   providers: [],

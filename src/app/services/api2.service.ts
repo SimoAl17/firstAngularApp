@@ -18,8 +18,13 @@ export class Api2Service {
     this.getDoneTasks();
   }
 
-  getActiveTasks() {
-    this.http.get<any[]>(this.API_URL + "?doneDate=null").pipe(
+  getActiveTasks(filter?: string) {
+    let filterParam = '';
+    if (filter) {
+      filterParam = '&search=' + filter;
+    }
+    this.http.get<any[]>(this.API_URL + filterParam).pipe(
+      map(tasks => tasks.filter(t => t.doneDate === null)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.activeTasks$.next(tasks))
   }
@@ -36,8 +41,12 @@ export class Api2Service {
     this.activeTasks$.next(activeArray);
   }
 
-  getDoneTasks() {
-    return this.http.get<any[]>(this.API_URL).pipe(
+  getDoneTasks(filter?: string) {
+    let filterParam = '';
+    if (filter) {
+      filterParam = '?search=' + filter;
+    }
+    return this.http.get<any[]>(this.API_URL + filterParam).pipe(
       map(tasks => tasks.filter(t => t.doneDate !== null)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.doneTasks$.next(tasks))

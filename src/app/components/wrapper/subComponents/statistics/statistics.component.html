@@ -1,1 +1,7 @@
-<div class="container"></div>
+<div class="container">
+    <h2>Statistics</h2>
+    <h3>Active Tasks: {{activeCount}}</h3>
+    <h4 *ngIf="lastActiveDate">Last Created Active Task: {{lastActiveDate | date:"HH:mm dd/MM/yyyy"}}</h4>
+    <h3>Done Tasks: {{doneCount}}</h3>
+    <h4 *ngIf="lastDoneDate">Done Tasks: {{lastDoneDate | date:"HH:mm dd/MM/yyyy"}}</h4>
+</div>

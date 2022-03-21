@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Task } from 'src/app/model/task';
 import { Api2Service } from 'src/app/services/api2.service';
 
@@ -7,16 +7,25 @@ import { Api2Service } from 'src/app/services/api2.service';
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
-export class ToDoListComponent implements OnInit {
+export class ToDoListComponent implements OnInit{
 
   taskList: Task[] = [];
+
+  selectedTask?: Task;
 
   constructor(private api2S: Api2Service) {
   }
 
   ngOnInit(): void {
     // this.apiS.getActiveTask().subscribe(this.filterAndParseTask);
-    this.api2S.activeTasks$.subscribe(task => this.taskList = task);
+    this.api2S.activeTasks$.subscribe(task => {
+      this.taskList = task;
+      if (this.taskList.length > 0) {
+        this.selectedTask = this.taskList[0];
+      }
+    });
+
+    
   }
 
   // filterAndParseTask(elements: any[]):void{
@@ -30,6 +39,8 @@ export class ToDoListComponent implements OnInit {
 
   
   taskDone(task: Task) {
+    console.log("pippo", task);
+    
     // this.api2S.completeTask(task).subscribe(b => {
     //   if (!b) {
     //     prompt("Errore nel backend")
@@ -45,4 +56,11 @@ export class ToDoListComponent implements OnInit {
       }
     });
   }
+
+  changeSelected(){
+    if (this.taskList.length > 1) {
+      this.selectedTask = this.taskList[1];
+    }
+  }
+
 }

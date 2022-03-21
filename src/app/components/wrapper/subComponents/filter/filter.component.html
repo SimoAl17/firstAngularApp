@@ -1,3 +1,14 @@
 <div class="container">
+    <h2>Filter</h2>
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Search Tasks</mat-label>
+        <input matInput type="text" [(ngModel)]="searchString">
+        <button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''"; findTasks()>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
+      <button (click)="findTasks()" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+        <mat-icon>search</mat-icon>
+      </button>
 </div>

@@ -18,5 +18,13 @@
       <button (click)="saveTask()" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
         <mat-icon>add</mat-icon>
       </button>
+
+      <mat-chip-list aria-label="Fish selection" selectable multiple>
+        <mat-chip (click)="selectChip()" selected="false">Tag1</mat-chip>
+        <mat-chip selected="false">Tag2</mat-chip>
+        <mat-chip selected="false">Tag3</mat-chip>
+        <mat-chip selected="false">Tag4</mat-chip>
+      </mat-chip-list>
+      
       
 </div>

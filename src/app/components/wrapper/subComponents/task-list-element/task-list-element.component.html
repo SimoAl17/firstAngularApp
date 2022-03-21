@@ -1,21 +1,21 @@
-<div *ngIf="task" class="container">
+<div *ngIf="_task" class="container">
 
   <mat-accordion class="example-headers-align" multi>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{task.name}}
+        {{_task.name}}
       </mat-panel-title>
       <mat-panel-description class="task-description">
-        Priority: {{task.priority}}
-        <mat-icon *ngIf="!task.doneDate" (click)="taskClicked($event)">done</mat-icon>
-        <mat-icon *ngIf="task.doneDate" (click)="taskClicked($event)">delete</mat-icon>
+        Priority: {{_task.priority}}
+        <mat-icon *ngIf="!_task.doneDate" (click)="taskClicked($event)">done</mat-icon>
+        <mat-icon *ngIf="_task.doneDate" (click)="taskClicked($event)">delete</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="data-container">
-      <span>{{task.creationDate}}</span>
-      <span *ngIf="task.doneDate">{{task.doneDate}}</span>
-      <span>{{task.id}}</span>
+      <span>{{_task.creationDate}}</span>
+      <span *ngIf="_task.doneDate">{{_task.doneDate}}</span>
+      <span>{{_task.id}}</span>
     </div>
     </mat-expansion-panel>
 

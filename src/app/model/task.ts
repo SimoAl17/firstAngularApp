@@ -3,7 +3,7 @@ export class Task {
   name: string;
   comment?: string;
 
-  tag?: string[];
+  tags?: string[];
 
   creationDate: Date;
   doneDate?: Date;
@@ -24,7 +24,7 @@ export class Task {
   }
 
   toDatabaseModel() {
-    const dbObject: any = {id: this.id, name: this.name, creationDate: this.creationDate.getTime()}
+    const dbObject: any = {id: this.id, name: this.name, creationDate: this.creationDate.getTime(), priority:this.priority}
     if (this.doneDate) {
       dbObject.doneDate = this.doneDate.getTime();
     } else {
