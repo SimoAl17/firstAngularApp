@@ -3,7 +3,7 @@
     <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Search Tasks</mat-label>
         <input matInput type="text" [(ngModel)]="searchString">
-        <button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''"; findTasks()>
+        <button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -11,4 +11,10 @@
       <button (click)="findTasks()" class="button" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
         <mat-icon>search</mat-icon>
       </button>
+
+      <div class="chips">
+        <mat-chip-list *ngFor="let chip of chips" aria-label="Fish selection">
+        <mat-chip [selected]="chip.selected" (click)="selectChip(chip)">{{chip.name}}</mat-chip>
+        </mat-chip-list>
+      </div>
 </div>

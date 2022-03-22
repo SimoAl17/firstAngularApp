@@ -12,7 +12,7 @@ export class Task {
   priority: number;
   repeat?: number;
 
-  constructor(id: string, name: string, priority: number = 0, creationDate?: number) {
+  constructor(id: string, name: string, priority: number = 0, creationDate?: number, tags?: string[]) {
     this.name = name;
     this.priority = Task.getFirstNumber(priority);
     if (creationDate) {
@@ -20,6 +20,7 @@ export class Task {
     } else {
       this.creationDate = new Date();
     }
+    this.tags = tags;
     this.id = id;
   }
 
@@ -29,6 +30,9 @@ export class Task {
       dbObject.doneDate = this.doneDate.getTime();
     } else {
       dbObject.doneDate = null;
+    }
+    if (this.tags && this.tags.length > 0) {
+      dbObject.tags = this.tags;
     }
     return dbObject;
   }

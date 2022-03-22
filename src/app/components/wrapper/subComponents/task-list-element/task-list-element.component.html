@@ -16,6 +16,7 @@
       <span>{{_task.creationDate}}</span>
       <span *ngIf="_task.doneDate">{{_task.doneDate}}</span>
       <span>{{_task.id}}</span>
+      <span *ngFor="let item of _task.tags">{{item}}</span>
     </div>
     </mat-expansion-panel>
 

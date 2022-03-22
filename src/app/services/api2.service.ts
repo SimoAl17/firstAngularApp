@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, first, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, first, map, Observable, of, Subscription } from 'rxjs';
+import { Tag } from '../model/tags';
 import { Task } from "../model/task";
 
 @Injectable({
@@ -13,21 +14,54 @@ export class Api2Service {
   public activeTasks$ = new BehaviorSubject<Task[]>([]);
   public doneTasks$ = new BehaviorSubject<Task[]>([]);
 
+  public activeSub?: Subscription;
+  public doneSub?: Subscription;
+
+  public chips: Tag[] = [{name: "ufficio", selected: false}, 
+                         {name: "tag2", selected: false}, 
+                         {name: "tag3", selected: false}, 
+                         {name: "tag4", selected: false}, 
+                         {name: "tag5", selected: false}, 
+                         {name: "tag6", selected: false}];
+
   constructor(private http: HttpClient) {
     this.getActiveTasks();
     this.getDoneTasks();
   }
 
-  getActiveTasks(filter?: string) {
-    let filterParam = '';
-    if (filter) {
-      filterParam = '&search=' + filter;
+  getActiveTasks(filter?: string, tags?: string[]) {
+    if (this.activeSub) {
+      this.activeSub.unsubscribe();
     }
-    this.http.get<any[]>(this.API_URL + filterParam).pipe(
+    let filterParam = '?';
+    if (filter) {
+      filterParam += 'search=' + filter;
+    }
+    this.activeSub = this.http.get<any[]>(this.API_URL + filterParam).pipe(
       map(tasks => tasks.filter(t => t.doneDate === null)),
+      map(tasks => this.filterByTags(tasks, tags)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.activeTasks$.next(tasks))
   }
+
+    filterByTags(tasks: any, tags: string[] | undefined): any[] {
+      if (!tags) {
+        return tasks;
+      } else {
+        const temp = [];
+        for (const task of tasks) {
+          if (task.tags) {
+            for (const tag of task.tags) {
+              if (tags.includes(tag)) {
+                temp.push(task);
+                break;
+              }
+            }
+          }
+        }
+        return temp;
+      }
+    }
 
   removeActiveTask(task: Task) {
     let activeArray = this.activeTasks$.value;
@@ -41,13 +75,17 @@ export class Api2Service {
     this.activeTasks$.next(activeArray);
   }
 
-  getDoneTasks(filter?: string) {
+  getDoneTasks(filter?: string, tags?: string[]) {
+    if (this.doneSub) {
+      this.doneSub.unsubscribe();
+    }
     let filterParam = '';
     if (filter) {
       filterParam = '?search=' + filter;
     }
-    return this.http.get<any[]>(this.API_URL + filterParam).pipe(
+    this.doneSub = this.http.get<any[]>(this.API_URL + filterParam).pipe(
       map(tasks => tasks.filter(t => t.doneDate !== null)),
+      map(tasks => this.filterByTags(tasks, tags)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.doneTasks$.next(tasks))
   }
@@ -95,7 +133,7 @@ export class Api2Service {
   
 
   parseTask(obj: any): Task {
-    const task = new Task(obj.id, obj.name, obj.priority, obj.creationDate);
+    const task = new Task(obj.id, obj.name, obj.priority, obj.creationDate, obj.tags);
     if (obj.doneDate) {
       task.doneDate = new Date(obj.doneDate);
     }
