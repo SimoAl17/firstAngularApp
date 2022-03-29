@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Tag } from 'src/app/model/tags';
 import { Api2Service } from 'src/app/services/api2.service';
 

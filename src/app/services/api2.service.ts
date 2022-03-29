@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, first, map, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { Tag } from '../model/tags';
 import { Task } from "../model/task";
 
@@ -24,6 +24,7 @@ export class Api2Service {
                          {name: "tag5", selected: false}, 
                          {name: "tag6", selected: false}];
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private http: HttpClient) {
     this.getActiveTasks();
     this.getDoneTasks();

@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/app/model/task';
 import { Api2Service } from 'src/app/services/api2.service';
 
@@ -13,6 +13,7 @@ export class ToDoListComponent implements OnInit{
 
   selectedTask?: Task;
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private api2S: Api2Service) {
   }
 
@@ -49,8 +50,8 @@ export class ToDoListComponent implements OnInit{
     this.api2S.removeActiveTask(task);
     this.api2S.addDoneTask(task);
     this.api2S.completeTask(task).subscribe({
-      next: task => {}, 
-      error: err => {
+      next: () => {}, 
+      error: () => {
         this.api2S.addActiveTask(task);
         this.api2S.removeDoneTask(task);
       }

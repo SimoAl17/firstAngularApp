@@ -1,10 +1,7 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatChip } from '@angular/material/chips';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Tag } from 'src/app/model/tags';
 import { Task } from 'src/app/model/task';
-import { ApiService } from 'src/app/services/api.service';
 import { Api2Service } from 'src/app/services/api2.service';
 
 
@@ -46,7 +43,7 @@ export class TaskInputComponent implements OnDestroy {
     }
     this.subscription = this.api2S.createTask(newTask).subscribe({
       next: task => {this.api2S.addActiveTask(task);}, 
-      error: err => {
+      error: () => {
         prompt("error");
       }
     })

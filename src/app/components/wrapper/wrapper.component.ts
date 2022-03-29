@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
 import { CommService } from 'src/app/services/comm.service';
 
 @Component({
@@ -11,6 +10,7 @@ export class WrapperComponent implements OnInit {
 
   public drawerOpen = false;
 
+  // eslint-disable-next-line no-unused-vars
   constructor(public commS: CommService) { }
 
   ngOnInit(): void {
